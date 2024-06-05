@@ -8,15 +8,10 @@ services:
     environment:
       ASPNETCORE_HTTP_PORTS: 8080
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DbContext: Data Source=db,1433;Initial
-        Catalog=my-service-db;User
-        Id=sa;Password=SqlAdminChangeMe1234!;TrustServerCertificate=true;
+      ConnectionStrings__DbContext: Host=db:5432;Username=admin;Password=admin;Database=postgres
     restart: on-failure
     profiles:
       - complete
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
   migrate:
     build:
       context: ./src
@@ -26,34 +21,23 @@ services:
       db:
         condition: service_healthy
     environment:
-      MIGRATION_CONNECTION: Data Source=db,1433;Initial Catalog=my-service-db;User
-        Id=sa;Password=SqlAdminChangeMe1234!;TrustServerCertificate=true;
+      MIGRATION_CONNECTION: Host=db:5432;Username=admin;Password=admin;Database=postgres
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: postgres:15
     restart: unless-stopped
     ports:
-      - 1433:1433
+      - 5432:5432
     environment:
-      MSSQL_SA_PASSWORD: SqlAdminChangeMe1234!
-      ACCEPT_EULA: Y
+      POSTGRES_DB: postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
     healthcheck:
       test:
-        - CMD
-        - /opt/mssql-tools/bin/sqlcmd
-        - -S
-        - localhost
-        - -U
-        - sa
-        - -P
-        - SqlAdminChangeMe1234!
-        - -Q
-        - SELECT 1
-        - -b
-        - -o
-        - /dev/null
+        - CMD-SHELL
+        - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
       timeout: 5s
       interval: 10s
       retries: 10
       start_period: 10s
 volumes:
-  mssql: ~
+  postgres: ~
