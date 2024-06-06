@@ -29,7 +29,7 @@ public class Customer
     [StringLength(1000)]
     public string? PhoneNumber { get; set; }
 
-    public string AddressId { get; set; }
+    public string? AddressId { get; set; }
 
     [ForeignKey(nameof(AddressId))]
     public Address? Address { get; set; } = null;
