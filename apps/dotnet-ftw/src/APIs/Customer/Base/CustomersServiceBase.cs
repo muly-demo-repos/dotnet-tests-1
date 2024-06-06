@@ -38,6 +38,13 @@ public abstract class CustomersServiceBase : ICustomersService
         {
             customer.Id = createDto.Id;
         }
+        if (createDto.Address != null)
+        {
+            customer.Address = await _context
+                .Addresses.Where(address => createDto.Address.Id == address.Id)
+                .FirstOrDefaultAsync();
+        }
+
         if (createDto.Orders != null)
         {
             customer.Orders = await _context

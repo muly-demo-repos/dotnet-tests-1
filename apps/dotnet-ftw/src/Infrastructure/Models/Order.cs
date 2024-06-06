@@ -24,7 +24,7 @@ public class Order
     [Range(-999999999, 999999999)]
     public double? TotalAmount { get; set; }
 
-    public string CustomerId { get; set; }
+    public string? CustomerId { get; set; }
 
     [ForeignKey(nameof(CustomerId))]
     public Customer? Customer { get; set; } = null;
