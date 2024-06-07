@@ -17,7 +17,7 @@ public static class ItemsExtensions
             Name = model.Name,
             Price = model.Price,
             StockQuantity = model.StockQuantity,
-            Orders = model.Orders.Select(x => new OrderIdDto { Id = x.Id }).ToList(),
+            Orders = model.Orders?.Select(x => new OrderIdDto { Id = x.Id }).ToList(),
         };
     }
 
