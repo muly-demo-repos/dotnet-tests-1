@@ -16,7 +16,7 @@ public static class OrdersExtensions
             DatePlaced = model.DatePlaced,
             TotalAmount = model.TotalAmount,
             Customer = new CustomerIdDto { Id = model.CustomerId },
-            Items = model.Items.Select(x => new ItemIdDto { Id = x.Id }).ToList(),
+            Items = model.Items?.Select(x => new ItemIdDto { Id = x.Id }).ToList(),
         };
     }
 

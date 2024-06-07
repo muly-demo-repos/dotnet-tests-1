@@ -17,8 +17,8 @@ public static class CustomersExtensions
             LastName = model.LastName,
             Email = model.Email,
             PhoneNumber = model.PhoneNumber,
-            Address = new AddressIdDto { Id = model.AddressId },
-            Orders = model.Orders.Select(x => new OrderIdDto { Id = x.Id }).ToList(),
+            Address = model.Address?.ToDto(),
+            Orders = model.Orders?.Select(x => new OrderIdDto { Id = x.Id }).ToList(),
         };
     }
 
