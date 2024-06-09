@@ -1,6 +1,7 @@
 using DotnetFtw.APIs;
 using DotnetFtw.APIs.Dtos;
 using DotnetFtw.APIs.Errors;
+using DotnetFtw.Core.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetFtw.APIs;
@@ -89,6 +90,20 @@ public abstract class OrdersControllerBase : ControllerBase
         }
 
         return NoContent();
+    }
+
+    [HttpPut("{Id}/order-custom-action")]
+    public async Task<OrderAnotherCustomEnumEnum> OrderCustomAction(
+        [FromBody()] OrderCustomDto orderCustomDto
+    )
+    {
+        return await _service.OrderCustomAction(orderCustomDto);
+    }
+
+    [HttpGet("{Id}/order-custom-action-with-primitives")]
+    public async Task<int> OrderCustomActionWithPrimitives([FromBody()] string data)
+    {
+        return await _service.OrderCustomActionWithPrimitives(data);
     }
 
     /// <summary>
