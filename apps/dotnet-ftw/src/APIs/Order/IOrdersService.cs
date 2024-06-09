@@ -1,4 +1,5 @@
 using DotnetFtw.APIs.Dtos;
+using DotnetFtw.Core.Enums;
 
 namespace DotnetFtw.APIs;
 
@@ -28,6 +29,8 @@ public interface IOrdersService
     /// Connect multiple Items records to Order
     /// </summary>
     public Task ConnectItems(OrderIdDto idDto, ItemIdDto[] itemsId);
+    public Task<OrderAnotherCustomEnumEnum> OrderCustomAction(OrderCustomDto orderCustomDto);
+    public Task<int> OrderCustomActionWithPrimitives(string data);
 
     /// <summary>
     /// Disconnect multiple Items records from Order

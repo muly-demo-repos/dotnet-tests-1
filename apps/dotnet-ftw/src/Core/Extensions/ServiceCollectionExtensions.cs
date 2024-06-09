@@ -11,6 +11,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IAddressesService, AddressesService>();
         services.AddScoped<ICustomersService, CustomersService>();
+        services.AddScoped<ICustomModuleTestsService, CustomModuleTestsService>();
         services.AddScoped<IItemsService, ItemsService>();
         services.AddScoped<IOrdersService, OrdersService>();
     }

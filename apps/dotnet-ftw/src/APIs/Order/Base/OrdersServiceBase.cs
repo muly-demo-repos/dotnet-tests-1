@@ -3,6 +3,7 @@ using DotnetFtw.APIs.Common;
 using DotnetFtw.APIs.Dtos;
 using DotnetFtw.APIs.Errors;
 using DotnetFtw.APIs.Extensions;
+using DotnetFtw.Core.Enums;
 using DotnetFtw.Infrastructure;
 using DotnetFtw.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
@@ -140,6 +141,16 @@ public abstract class OrdersServiceBase : IOrdersService
         }
 
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<OrderAnotherCustomEnumEnum> OrderCustomAction(OrderCustomDto orderCustomDto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<int> OrderCustomActionWithPrimitives(string data)
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>
